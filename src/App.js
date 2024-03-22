@@ -26,7 +26,7 @@ export default function App() {
                     element={<Card />}
                 />
                 <Route
-                    path={'/product/*'}
+                    path={'/product/:product_id'}
                     element={<SingleProduct />}
                 />
             </Routes>

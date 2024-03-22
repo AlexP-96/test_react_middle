@@ -24,19 +24,14 @@ const ProductList = ({
         const refElem = useRef(null);
 
         useEffect(() => {
-            console.log(image);
+            // console.log(image);s 
         }, []);
-
-        const handlerMouseHover = (e) => {
-
-        };
 
         return (
 
             <Link
                 to={'/product/' + id}
                 className='wrapper-product'
-                onClick={() => dispatchId(actionGetProductId(id))}
             >
                 <h4 className='title__product'>{name}</h4>
                 <div

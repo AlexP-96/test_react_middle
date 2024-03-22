@@ -1,47 +1,64 @@
 import React, {
-    useContext,
-    useEffect,
+    useEffect, useState,
 } from 'react';
 
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionGetProduct, actionIsLoader } from '../../redux/action/actions';
+import { getProduct } from '../../services/api';
+import ProductColor from './colors/ProductColor';
+import ProductImages from './product_images/ProductImages';
+import ProductSizes from './sizes/ProductSizes';
 
 const SingleProduct = () => {
 
-    const selectorId = useSelector(state => state.idProduct.id)
+    const dispatch = useDispatch();
+    const selectorProduct = useSelector(state => state.getProduct);
+    const { product_id } = useParams();
 
     useEffect(() => {
-        console.log(selectorId);
-    }, [])
+        getProduct(Number(product_id))
+            .then(data => {
+                dispatch(actionIsLoader(false));
+                dispatch(actionGetProduct(data));
+
+            })
+            .catch(err => {
+                dispatch(actionIsLoader(true));
+                console.log(err);
+            })
+
+    }, []);
 
     return (
-        <div className='product__item'>
-            <h3 className='title__product'>{'name'}</h3>
-            <img
-                src='#'
-                alt='name'
-            />
-            <p className='color__product'>
-                Цвет: {'цвет'}
-            </p>
-            <p className='description__product'>
-                {'descr product'}
-            </p>
-            <div className='sizes__product'>
-                <div className='aside__radio-size-product'>
-                    <input
-                        type='radio'
-                        id={'label_id_' + 2}
-                        className='input__radio-product'
-                    />
-                    <label htmlFor={'label_id_' + 2}>{'XS' + '-' + '44'}</label>
-                </div>
-            </div>
-            <strong className='price__product'>
-                {'price'}
-            </strong>
-            <button className='to__card-product'>В корзину</button>
-        </div>
-    );
+        <>
+            {
+                selectorProduct.isLoader && 'Детальная загрузка товара...'
+            }
+
+            {
+                !selectorProduct.isLoader && selectorProduct.data.map(item => {
+                    return (
+                        <div className='product__item' key={item.id}>
+                            <h3 className='title__product'>{item.name}</h3>
+                            <ProductImages images={item.colors[0]} />
+                            <ProductColor colors={item.colors} />
+                            <p className='description__product'>
+                                {item.colors[0].description}
+                            </p>
+                            <div className='sizes__product'>
+                            <ProductSizes size={item.colors[0].sizes} />
+                            </div>
+                            <strong className='price__product'>
+                                Цена: {item.colors[0].price}
+                            </strong>
+                            <button className='to__card-product'>В корзину</button>
+                        </div>
+                    )
+                })
+            }
+        </>
+    )
 };
 
 export default SingleProduct;

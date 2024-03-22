@@ -29,3 +29,13 @@
 .wrapper__img-product img {
     width: 100%;
 }
+.product__item {
+    display: flex;
+    flex-direction: column;
+}
+.image_product {
+    max-width: 300px;
+}
+.image_product img {
+    width: 100%;
+}

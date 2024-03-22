@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import reducerGetId from './reducer-id';
+import reducerProduct from './reducer-product';
+import reducerSize from './reducer-sizes';
 
 const rootReducer = combineReducers({
-    idProduct: reducerGetId,
+    getProduct: reducerProduct,
+    getSizeProduct: reducerSize
 });
 
 export default rootReducer;
