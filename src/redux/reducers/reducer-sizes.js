@@ -1,11 +1,11 @@
 import { GET_DATA_SIZES, IS_LOADER_PRODUCT_SIZE } from "../action/actions";
 
-const initialState = {
-  isLoader: true,
+export const initialStateSize = {
+  isLoading: true,
   data: [],
 };
 
-const reducerSize = (state = initialState, action) => {
+const reducerSize = (state = initialStateSize, action) => {
   switch (action.type) {
     case GET_DATA_SIZES:
       return {
@@ -15,12 +15,10 @@ const reducerSize = (state = initialState, action) => {
     case IS_LOADER_PRODUCT_SIZE:
       return {
         ...state,
-        isLoader: action.payload,
+        isLoading: action.payload,
       };
     default:
-      return {
-        state,
-      };
+      return state
   }
 };
 

@@ -1,24 +1,28 @@
 import React, { useState } from 'react';
 import './ProductColor.css'
+import { useDispatch } from 'react-redux';
+import { actionColor } from '../../../redux/action/actions';
 
 const ProductColor = ({ colors }) => {
-
+    const dispatch = useDispatch();
+    // const selectorColor = useSelector(state => state.getProduct)
     const [checkedInput, setCheckedInput] = useState(true);
-    const [idColor, setIdColor] = useState(0);
 
-    const handlerChecked = (e, indexId) => {
+    const handlerChecked = (e, idColor) => {
+        dispatch(actionColor(idColor));
         setCheckedInput(e.target.checked = checkedInput);
-        setIdColor(indexId);
+        dispatch(actionColor(idColor))
     }
+    // console.log(colors)
     const iterateColorName = () => {
         return (
-            colors.map((_color, index) => {
+            colors.colors.map((_color, index) => {
                 return (
                     <div
                         className='wrapper__color'
-                        key={index}>
+                        key={_color.id}>
                         <input
-                            onChange={(e) => handlerChecked(e, index)}
+                            onChange={(e) => handlerChecked(e, _color.id)}
                             defaultChecked={index === 0}
                             type="radio"
                             name='color'
@@ -31,7 +35,10 @@ const ProductColor = ({ colors }) => {
 
     return (
         <div className='color__product'>
-            Цвет: {iterateColorName()}
+            {
+                colors.colors &&
+                iterateColorName()
+            }
         </div>
     );
 };

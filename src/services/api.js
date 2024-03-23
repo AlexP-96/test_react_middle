@@ -56,7 +56,7 @@ const products = [
         images: ["/images/2/blue_front.png", "/images/2/blue_back.png"],
         price: "89.00",
         description: 'Описание для "Майка синий"',
-        sizes: [2],
+        sizes: [2,3],
       },
       {
         id: 3,
@@ -72,7 +72,7 @@ const products = [
 
 function getSizes() {
   return new Promise((resolve) => {
-    setTimeout(() => resolve(sizes), 2000);
+    setTimeout(() => resolve(sizes), 250);
   });
 }
 
@@ -104,7 +104,7 @@ function getProduct(id) {
       } else {
         reject(new Error("getProduct: Product not found"));
       }
-    }, 1500);
+    }, 250);
   });
 }
 

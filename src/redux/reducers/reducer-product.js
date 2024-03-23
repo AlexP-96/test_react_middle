@@ -1,24 +1,48 @@
-import { GET_DATA_PRODUCT, IS_LOADER_PRODUCT } from "../action/actions";
+import {
+  GET_DATA_PRODUCT,
+  IS_LOADER_PRODUCT,
+  GET_COLOR_PRODUCT,
+  GET_NAME_PRODUCT,
+  DATA_COLOR,
+} from "../action/actions";
 
-let initialState = {
-  isLoader: true,
+export const initialStateProduct = {
+  isLoading: true,
+  nameProduct: "",
+  idColor: null,
+  dataColor: [],
   data: [],
 };
 
-const reducerProduct = (state = initialState, action) => {
+const reducerProduct = (state = initialStateProduct, action) => {
   switch (action.type) {
     case GET_DATA_PRODUCT:
       return {
         ...state,
-        isLoader: false,
-        data: [action.payload],
+        isLoading: false,
+        data: action.payload,
+      };
+    case DATA_COLOR:
+      return {
+        ...state,
+        isLoading: false,
+        dataColor: action.payload,
       };
     case IS_LOADER_PRODUCT:
       return {
         ...state,
-        isLoader: action.payload,
+        isLoading: action.payload,
       };
-
+    case GET_COLOR_PRODUCT:
+      return {
+        ...state,
+        idColor: action.payload,
+      };
+    case GET_NAME_PRODUCT:
+      return {
+        ...state,
+        nameProduct: action.payload.name,
+      };
     default:
       return state;
   }
