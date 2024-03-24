@@ -44,12 +44,12 @@
 .loading {
   padding: 20px 0;
 }
-.input__radio-product {
-  width: 0;
-  height: 0;
-  position: absolute;
-  opacity: 0;
-}
+/* .input__radio-product { */
+  /* width: 0; */
+  /* height: 0; */
+  /* position: absolute; */
+  /* opacity: 0; */
+/* } */
 .label__product {
   cursor: pointer;
   transition: all .3s;

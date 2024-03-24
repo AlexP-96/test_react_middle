@@ -1,6 +1,8 @@
 import React from 'react';
+import './ProductSize.css';
 
-const InputSize = ({ availableId, not, label, number }) => {
+const InputSize = ({ availableId, nothing, label, number }) => {
+
     return (
         <div
             className='aside__radio-size-product'
@@ -8,13 +10,14 @@ const InputSize = ({ availableId, not, label, number }) => {
             <input
                 type='radio'
                 name='size'
-                disabled={not}
+                disabled={nothing}
                 id={'select_size_' + availableId}
                 className='input__radio-product'
             />
             <label
-            className='label__product' 
-            htmlFor={'select_size_' + availableId}>{label + '-' + number}</label>
+                className={'label__product'}
+                htmlFor={'select_size_' + availableId}>{label + '-' + number}</label>
+            <br />
         </div>
 
     );

@@ -35,6 +35,7 @@ const ProductColor = ({ colors }) => {
 
     return (
         <div className='color__product'>
+            <div className="title__sizes-product">Доступные цвета:</div>
             {
                 colors.colors &&
                 iterateColorName()
