@@ -11,7 +11,7 @@ import {
 } from 'react-redux';
 
 import { Link } from 'react-router-dom';
-import { actionGetProductId } from '../../redux/action/actions';
+import { actionGetProductId } from '../../redux/actions/actions';
 
 const ProductList = ({
         name,

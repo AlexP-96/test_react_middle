@@ -1,15 +1,16 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-const ProductDescription = ({description}) => {
+const ProductDescription = ({ description }) => {
     const selectorDescription = useSelector(state => state.getProduct.dataColor.description);
 
-    // console.log(selectorDescription)
-
     return (
-        <p className='description__product'>
-            {selectorDescription}
-        </p>
+        <div className='wrapper__description'>
+            <div className='title__description'>Описание:</div>
+            <p className='description__product'>
+                {selectorDescription}
+            </p>
+        </div>
     );
 };
 

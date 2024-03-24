@@ -1,45 +1,62 @@
-import React, { useState } from 'react';
-import './ProductColor.css'
-import { useDispatch } from 'react-redux';
-import { actionColor } from '../../../redux/action/actions';
+import React, {
+    useEffect,
+    useState,
+} from 'react';
+import './ProductColor.css';
+import {
+    useDispatch,
+    useSelector,
+} from 'react-redux';
+import {
+    actionColor,
+    actionImageNext,
+} from '../../../redux/actions/actions';
 
 const ProductColor = ({ colors }) => {
     const dispatch = useDispatch();
-    // const selectorColor = useSelector(state => state.getProduct)
     const [checkedInput, setCheckedInput] = useState(true);
 
     const handlerChecked = (e, idColor) => {
         dispatch(actionColor(idColor));
         setCheckedInput(e.target.checked = checkedInput);
-        dispatch(actionColor(idColor))
-    }
-    // console.log(colors)
+        dispatch(actionColor(idColor));
+        dispatch(actionImageNext(0));
+    };
+
     const iterateColorName = () => {
         return (
             colors.colors.map((_color, index) => {
                 return (
                     <div
                         className='wrapper__color'
-                        key={_color.id}>
+                        key={_color.id}
+                    >
                         <input
                             onChange={(e) => handlerChecked(e, _color.id)}
                             defaultChecked={index === 0}
-                            type="radio"
+                            type='radio'
                             name='color'
-                            id={'color_' + index} />
-                        <label htmlFor={'color_' + index}>{_color.name}</label>
+                            className='input__radio-product'
+                            id={'color_' + index}
+                        />
+                        <label
+                            htmlFor={'color_' + index}
+                            className='label__color-product'
+                        >{_color.name}</label>
                     </div>
-                )
-            }))
-    }
+                );
+            }));
+    };
 
     return (
         <div className='color__product'>
-            <div className="title__sizes-product">Доступные цвета:</div>
-            {
-                colors.colors &&
-                iterateColorName()
-            }
+            <div className='title__sizes-product'>Доступные цвета:</div>
+            <div className='aside__colors'>
+                {
+                    colors.colors &&
+                    iterateColorName()
+                }
+            </div>
         </div>
     );
 };

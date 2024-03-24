@@ -4,10 +4,8 @@ import React, {
 } from 'react';
 
 import ProductList from './ProductList';
-import ProductIdContext from '../context/ProductIdContext';
 
 import { getProducts } from '../../services/api';
-import SingleProduct from './SingleProduct';
 
 const CatalogProduct = () => {
 

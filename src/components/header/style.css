@@ -3,3 +3,21 @@ header {
     justify-content: space-between;
     padding: 20px 0;
 }
+.link__to-card {
+    position: relative;
+}
+.link__to-card:after {
+    content: attr(data-count);
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+    right: -12px;
+    top: -12px;
+    border-radius: 50%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #d5caca;
+}

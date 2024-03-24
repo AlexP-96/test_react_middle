@@ -1,4 +1,4 @@
-import { GET_DATA_SIZES, IS_LOADER_PRODUCT_SIZE } from "../action/actions";
+import { GET_DATA_SIZES, IS_LOADER_PRODUCT_SIZE } from "../actions/actions";
 
 export const initialStateSize = {
   isLoading: true,

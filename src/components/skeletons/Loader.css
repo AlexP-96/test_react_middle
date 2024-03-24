@@ -1,0 +1,36 @@
+.wrapper__skeleton {
+    position: relative;
+}
+
+.wrapper__skeleton > .skeleton {
+    background: #e0dddd;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+@keyframes loading {
+    0% {
+        left: -50%;
+    }
+    50% {
+        left: 50%;
+    }
+    100%{
+        left: -50%;
+    }
+}
+
+.wrapper__skeleton > .skeleton:after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    transform: rotate(-45deg);
+    left: 0;
+    top: 0;
+    background: rgb(255, 255, 255, 0.5);
+    animation: loading 2s infinite alternate;
+}
+
