@@ -1,11 +1,9 @@
 import React, {
-    useEffect,
     useState,
 } from 'react';
 import './ProductColor.css';
 import {
     useDispatch,
-    useSelector,
 } from 'react-redux';
 import {
     actionColor,

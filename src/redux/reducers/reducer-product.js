@@ -26,6 +26,7 @@ const reducerProduct = (state = initialStateProduct, action) => {
                 ...state,
                 selectSize: action.payload,
             };
+
         case GET_DATA_PRODUCT:
             return {
                 ...state,

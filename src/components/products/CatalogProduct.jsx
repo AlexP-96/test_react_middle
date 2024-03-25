@@ -1,29 +1,36 @@
 import React, {
     useEffect,
-    useState,
 } from 'react';
 
 import ProductList from './ProductList';
 
 import { getProducts } from '../../services/api';
+import {
+    useDispatch,
+    useSelector,
+} from 'react-redux';
+import {
+    listProductSelector,
+    listProductsIsLoadingSelector,
+} from '../../redux/store/selectors';
+
 
 const CatalogProduct = () => {
 
-    const [products, setProducts] = useState([]);
-    const [loader, setLoader] = useState(false);
+    const listProducts = useSelector(listProductSelector);
+    const isLoadingListProducts = useSelector(listProductsIsLoadingSelector);
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        getProducts().then(data => {
-            setProducts(data);
-            setLoader(true);
-        });
+        dispatch(getProducts());
 
     }, []);
 
     const iterateCatalogItems = () => {
 
         return (
-            products.map(item => {
+            listProducts.map(item => {
                 return (
                     <ProductList
                         key={item.id}
@@ -39,9 +46,9 @@ const CatalogProduct = () => {
     return (
         <div className='container'>
             <div className='product__container'>
-                {loader &&
-                    iterateCatalogItems()
-                }
+                {isLoadingListProducts && 'Загрузка списка товаров...'}
+                {!isLoadingListProducts && iterateCatalogItems()}
+
             </div>
         </div>
     );

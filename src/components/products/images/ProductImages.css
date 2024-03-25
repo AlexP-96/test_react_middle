@@ -1,0 +1,46 @@
+.image_product {
+    display: flex;
+    gap: 10px;
+    position: relative;
+}
+
+.btn__image {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.btn_image-prev {
+    left: 0;
+    bottom: 0;
+}
+
+.btn_image-prev:after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-left: 3px solid black;
+    border-bottom: 3px solid black;
+    left: 60%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.btn_image-next {
+    right: 0;
+    bottom: 0;
+}
+.btn_image-next:after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-left: 3px solid black;
+    border-bottom: 3px solid black;
+    right: 60%;
+    top: 50%;
+    transform: translate(50%, -50%) rotate(-135deg);
+}

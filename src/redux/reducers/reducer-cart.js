@@ -1,16 +1,18 @@
 import {
-    ADD_PRODUCT_CARD,
-    DELETE_PRODUCT_CARD,
+    ADD_PRODUCT_CART,
+    DELETE_PRODUCT_CART,
+    RESULT_PRICE_CART,
 } from '../actions/actions';
 
 export const initialStateCard = {
     isLoading: true,
     items: [],
+    resultPrice: 0,
 };
 
-const reducerCard = (state = initialStateCard, action) => {
+const reducerCart = (state = initialStateCard, action) => {
     switch (action.type) {
-        case ADD_PRODUCT_CARD:
+        case ADD_PRODUCT_CART:
             return {
                 ...state,
                 items: [
@@ -18,13 +20,18 @@ const reducerCard = (state = initialStateCard, action) => {
                     action.payload,
                 ],
             };
-        case DELETE_PRODUCT_CARD:
+        case DELETE_PRODUCT_CART:
             return {
                 ...state,
                 items: [...state.items].filter((item, index) => index !== action.payload),
+            };
+        case RESULT_PRICE_CART:
+            return {
+                ...state,
+                resultPrice: action.payload,
             };
         default:
             return state;
     }
 };
-export default reducerCard;
+export default reducerCart;

@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
@@ -10,14 +10,14 @@ import './styles/index.css';
 
 const rootView = document.getElementById('root');
 
-if (rootView) {
-    ReactDOM.render(
-        <Provider store={store}>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-        </Provider>
-        ,
+const root =
+    createRoot(
         rootView,
     );
-}
+root.render(
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>);
+

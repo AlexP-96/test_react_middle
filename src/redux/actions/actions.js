@@ -7,13 +7,37 @@ export const GET_NAME_PRODUCT = 'GET_NAME_PRODUCT';
 export const DATA_COLOR = 'DATA_COLOR';
 export const IMAGE_PRODUCT_NEXT = 'IMAGE_PRODUCT_NEXT';
 export const IMAGE_PRODUCT_PREV = 'IMAGE_PRODUCT_PREV';
-export const ADD_PRODUCT_CARD = 'ADD_PRODUCT_CARD';
+export const ADD_PRODUCT_CART = 'ADD_PRODUCT_CART';
 export const SELECT_SIZE_PRODUCT = 'SELECT_SIZE_PRODUCT';
-export const DELETE_PRODUCT_CARD = 'DELETE_PRODUCT_CARD';
+export const DELETE_PRODUCT_CART = 'DELETE_PRODUCT_CART';
+export const RESULT_PRICE_CART = 'RESULT_PRICE_CART';
+export const LOADING_LIST_PRODUCT = 'LOAD_LIST_PRODUCT';
+export const DATA_LIST_PRODUCT = 'DATA_LIST_PRODUCT';
+
+export const actionDataListProduct = (payload) => {
+    return {
+        type: DATA_LIST_PRODUCT,
+        payload,
+    };
+};
+
+export const actionLoadingListProduct = (payload) => {
+    return {
+        type: LOADING_LIST_PRODUCT,
+        payload,
+    };
+};
+
+export const actionResultPriceCart = (payload) => {
+    return {
+        type: RESULT_PRICE_CART,
+        payload,
+    };
+};
 
 export const actionDeleteProductCard = (payload) => {
     return {
-        type: DELETE_PRODUCT_CARD,
+        type: DELETE_PRODUCT_CART,
         payload,
     };
 };
@@ -27,7 +51,7 @@ export const actionSelectSizeProduct = (payload) => {
 
 export const actionAddProductCard = (payload) => {
     return {
-        type: ADD_PRODUCT_CARD,
+        type: ADD_PRODUCT_CART,
         payload,
     };
 };

@@ -7,57 +7,58 @@ import {
 } from 'react-redux';
 
 import {
-    actionImagePrev,
     actionImageNext,
+    actionImagePrev,
 } from '../../../redux/actions/actions';
 import Skeleton from '../../skeletons/Skeleton';
+import {
+    productSelector,
+    sizesIsLoadingSelector,
+} from '../../../redux/store/selectors';
 
 const ProductImages = () => {
-
     const dispatch = useDispatch();
-    const selector = useSelector(state => state.getProduct);
-    const selectorSize = useSelector(state => state.getSizeProduct);
+    const product = useSelector(productSelector);
+    const sizesIsLoading = useSelector(sizesIsLoadingSelector);
 
     const handlerImage = step => {
-        let countImages = selector.dataColor.images.length - 1;
+        let countImages = product.dataColor.images.length - 1;
         if (step === '+') {
             dispatch(actionImageNext());
-            if (selector.countImage >= countImages) {
+            if (product.countImage >= countImages) {
                 dispatch(actionImageNext(0));
             }
         }
         if (step === '-') {
             dispatch(actionImagePrev());
-            if (selector.countImage < countImages) {
+            if (product.countImage < countImages) {
                 dispatch(actionImagePrev(countImages));
             }
         }
     };
     return (
         <div className='wrapper__images-product'>
-            {selector.dataColor.images &&
-
+            {product.dataColor.images && (
                 <div className='image_product'>
-                    <button onClick={() => handlerImage('-')}> Предыдущее</button>
-                    {
-                        selectorSize.isLoading &&
+                    <button className='btn__image btn_image-prev' onClick={() => handlerImage('-')}></button>
+
+                    {sizesIsLoading && (
                         <Skeleton
                             width={300}
                             height={400}
                         />
-                    }
-                    {
-                        !selectorSize.isLoading &&
+                    )}
+
+                    {!sizesIsLoading && (
                         <img
-                            src={selector.dataColor.images[selector.countImage]}
+                            src={product.dataColor.images[product.countImage]}
                             alt='name'
                         />
-                    }
+                    )}
 
-                    <button onClick={() => handlerImage('+')}>Следущее</button>
+                    <button className='btn__image btn_image-next' onClick={() => handlerImage('+')}></button>
                 </div>
-
-            }
+            )}
         </div>
     );
 };
