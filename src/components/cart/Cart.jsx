@@ -6,7 +6,6 @@ import {
     useSelector,
 } from 'react-redux';
 import {
-    actionAddProductCard,
     actionDeleteProductCard,
     actionResultPriceCart,
 } from '../../redux/actions/actions';
@@ -29,9 +28,14 @@ const Card = () => {
             dispatch(actionResultPriceCart(result));
         });
     });
-    useEffect(() => {
 
-    }, []);
+    const handlerDelProduct = (e) => {
+        return (dispatch, getState) => {
+            dispatch(actionDeleteProductCard(Number(e.target.getAttribute(
+                'data-del'))));
+            localStorage.setItem('cart', JSON.stringify(getState().cart.items));
+        };
+    };
 
     return (
         <>
@@ -58,8 +62,7 @@ const Card = () => {
                                             <div>Цена: {item.price}</div>
                                             <button
                                                 data-del={index}
-                                                onClick={(e) => dispatch(actionDeleteProductCard(Number(e.target.getAttribute(
-                                                    'data-del'))))}
+                                                onClick={(e) => dispatch(handlerDelProduct(e))}
                                             >
                                                 Удалить
                                             </button>

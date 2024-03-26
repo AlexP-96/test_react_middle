@@ -22,7 +22,7 @@ import {
     cartItemsSelector,
     productSelector,
 } from '../../redux/store/selectors';
-import cart from '../cart/Cart';
+
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
@@ -50,7 +50,9 @@ const SingleProduct = () => {
     }, [product.idColor]);
 
     useEffect(() => {
-        localStorage.setItem('cart', JSON.stringify(cartProducts))
+        if (cartProducts.length !== 0) {
+            localStorage.setItem('cart', JSON.stringify(cartProducts));
+        }
     }, [cartProducts]);
 
     const handlerCardProduct = () => {
@@ -59,7 +61,7 @@ const SingleProduct = () => {
         } else {
             let objData = {
                 // idProduct: null,
-                // idColor: null,
+
                 productName: null,
                 productColor: null,
                 productSize: null,

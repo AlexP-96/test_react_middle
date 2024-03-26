@@ -23,19 +23,16 @@ import {
 
 export default function App() {
 
-    const productsCart = useSelector(cartItemsSelector);
     const dispatch = useDispatch();
 
     useEffect(() => {
         let dataCartLocalStorage = localStorage.getItem('cart');
-        // console.log(JSON.parse(dataCartLocalStorage).length);
+
         if (JSON.parse(dataCartLocalStorage) !== null && JSON.parse(dataCartLocalStorage).length > 0) {
 
             JSON.parse(dataCartLocalStorage).map(items => {
                 dispatch(actionAddProductCard(items));
             });
-
-            console.log('yep');
         }
     }, []);
 
