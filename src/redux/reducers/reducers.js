@@ -5,8 +5,8 @@ import reducerCart from './reducer-cart';
 import reducerListProduct from './reducer-list-product';
 
 const rootReducer = combineReducers({
-    getProduct: reducerProduct,
-    getSizeProduct: reducerSize,
+    product: reducerProduct,
+    sizes: reducerSize,
     cart: reducerCart,
     listProduct: reducerListProduct,
 });
