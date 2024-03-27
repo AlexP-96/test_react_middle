@@ -10,8 +10,8 @@ import { sizesIsLoadingSelector } from '../../../toolkitRedux/selectors';
 import { isLoadingSizes } from '../../../toolkitRedux/reducers/sizesSlice';
 
 const ProductSizes = ({ size }) => {
-    const dispatch = useDispatch();
 
+    const dispatch = useDispatch();
     const isLoading = useSelector(sizesIsLoadingSelector);
 
     useEffect(() => {

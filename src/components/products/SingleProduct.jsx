@@ -92,21 +92,15 @@ const SingleProduct = () => {
             {!product.isLoading && (
                 <div className='product__item'>
                     <h3 className='title__product'>{product.nameProduct}</h3>
-
                     <ProductImages />
-
                     <ProductColor colors={product.data} />
-
                     <ProductDescription />
-
                     <div className='sizes__product'>
                         <ProductSizes size={product.dataColor.sizes} />
                     </div>
-
                     <div className='price__product'>
                         Цена: <strong>{product.dataColor.price}</strong>
                     </div>
-
                     <button
                         className='to__card-product'
                         onClick={handlerCardProduct}

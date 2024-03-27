@@ -14,7 +14,6 @@ const rootReducer = combineReducers({
     sizes: sizesSlice,
 });
 
-
 export const store = configureStore({
     reducer: rootReducer,
 });

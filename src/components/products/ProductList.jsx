@@ -13,7 +13,6 @@ const ProductList = ({
     }) => {
 
         return (
-
             <Link
                 to={'/product/' + id}
                 className='wrapper-product'
@@ -30,7 +29,6 @@ const ProductList = ({
                             src={image[0]}
                             alt='image_photo'
                         />
-
                     </div>
                 </div>
             </Link>

@@ -16,7 +16,6 @@ import {
     prevCountVisibleImageProduct,
 } from '../../../toolkitRedux/reducers/productSlice';
 
-
 const ProductImages = () => {
     const dispatch = useDispatch();
     const product = useSelector(productSelector);
@@ -41,7 +40,10 @@ const ProductImages = () => {
         <div className='wrapper__images-product'>
             {product.dataColor.images && (
                 <div className='image_product'>
-                    <button className='btn__image btn_image-prev' onClick={() => handlerImage('-')}></button>
+                    <button
+                        className='btn__image btn_image-prev'
+                        onClick={() => handlerImage('-')}
+                    ></button>
 
                     {sizesIsLoading && (
                         <Skeleton
@@ -57,7 +59,10 @@ const ProductImages = () => {
                         />
                     )}
 
-                    <button className='btn__image btn_image-next' onClick={() => handlerImage('+')}></button>
+                    <button
+                        className='btn__image btn_image-next'
+                        onClick={() => handlerImage('+')}
+                    ></button>
                 </div>
             )}
         </div>

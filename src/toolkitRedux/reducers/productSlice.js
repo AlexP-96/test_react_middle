@@ -9,11 +9,11 @@ const productSlice = createSlice({
         countImage: 0,
         selectSize: null,
         dataColor: {},
-        data: [],
+        data: {},
     },
     reducers: {
         addToStateProduct(state, action) {
-            state.data = [action.payload];
+            state.data = action.payload;
         },
         isLoadingProduct(state, action) {
             state.isLoading = action.payload;

@@ -10,6 +10,8 @@ const SizesList = ({ size }) => {
 
     if (!size || !sizesList.length) return null;
 
+    console.log(sizesList);
+
     return (
         <div className='wrapper__sizes'>
             <div className='aside__sizes'>
