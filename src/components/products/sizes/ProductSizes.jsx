@@ -7,7 +7,7 @@ import {
 import Skeleton from '../../skeletons/Skeleton';
 import SizesList from './SizesList';
 import { sizesIsLoadingSelector } from '../../../toolkitRedux/selectors';
-import { isLoadingSizes } from '../../../toolkitRedux/sizesSlice';
+import { isLoadingSizes } from '../../../toolkitRedux/reducers/sizesSlice';
 
 const ProductSizes = ({ size }) => {
     const dispatch = useDispatch();

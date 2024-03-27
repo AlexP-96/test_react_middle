@@ -19,7 +19,7 @@ import {
     productSelector,
 } from '../../toolkitRedux/selectors';
 import { isLoadingProduct } from '../../toolkitRedux/reducers/productSlice';
-import { isLoadingSizes } from '../../toolkitRedux/sizesSlice';
+import { isLoadingSizes } from '../../toolkitRedux/reducers/sizesSlice';
 import { addProductCart } from '../../toolkitRedux/reducers/cartSlice';
 
 

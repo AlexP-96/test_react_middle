@@ -12,7 +12,7 @@ import {
 import {
     addToStateSizes,
     isLoadingSizes,
-} from '../toolkitRedux/sizesSlice';
+} from '../toolkitRedux/reducers/sizesSlice';
 
 const sizes = [
     {
