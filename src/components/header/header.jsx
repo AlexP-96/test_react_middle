@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './style.css';
-import { cartItemsLengthSelector } from '../../redux/store/selectors';
+import { cartItemsLengthSelector } from '../../toolkitRedux/selectors';
 
 const Header = () => {
     const cardItemsLength = useSelector(cartItemsLengthSelector);

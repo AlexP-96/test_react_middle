@@ -5,11 +5,7 @@ import {
     useSelector,
 } from 'react-redux';
 import Skeleton from '../skeletons/Skeleton';
-import {
-    actionAddProductCard,
-    actionIsLoader,
-    actionIsLoaderProductSize,
-} from '../../redux/actions/actions';
+
 import {
     getProduct,
     getProductColor,
@@ -21,7 +17,10 @@ import ProductDescription from './description/ProductDescription';
 import {
     cartItemsSelector,
     productSelector,
-} from '../../redux/store/selectors';
+} from '../../toolkitRedux/selectors';
+import { isLoadingProduct } from '../../toolkitRedux/productSlice';
+import { isLoadingSizes } from '../../toolkitRedux/sizesSlice';
+import { addProductCart } from '../../toolkitRedux/cartSlice';
 
 
 const SingleProduct = () => {
@@ -33,7 +32,7 @@ const SingleProduct = () => {
     const { product_id } = useParams();
 
     useEffect(() => {
-        dispatch(actionIsLoader(true));
+        dispatch(isLoadingProduct(true));
         dispatch(getProduct(Number(product_id)));
 
         return () => {
@@ -44,7 +43,7 @@ const SingleProduct = () => {
 
     useEffect(() => {
         if (product.idColor) {
-            dispatch(actionIsLoaderProductSize(true));
+            dispatch(isLoadingSizes(true));
             dispatch(getProductColor(Number(product_id), product.idColor));
         }
     }, [product.idColor]);
@@ -77,7 +76,7 @@ const SingleProduct = () => {
             objData.productSize = product.selectSize;
             objData.image = product.dataColor.images[0];
 
-            dispatch(actionAddProductCard(objData));
+            dispatch(addProductCart(objData));
         }
     };
 

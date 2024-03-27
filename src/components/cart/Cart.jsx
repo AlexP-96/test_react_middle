@@ -5,15 +5,16 @@ import {
     useDispatch,
     useSelector,
 } from 'react-redux';
-import {
-    actionDeleteProductCard,
-    actionResultPriceCart,
-} from '../../redux/actions/actions';
+
 import './Cart.css';
 import {
     cartItemsSelector,
     cartResulPrice,
-} from '../../redux/store/selectors';
+} from '../../toolkitRedux/selectors';
+import {
+    deleteProductCart,
+    totalPriceCart,
+} from '../../toolkitRedux/cartSlice';
 
 const Card = () => {
     const dispatch = useDispatch();
@@ -25,13 +26,13 @@ const Card = () => {
         let result = 0;
         cardItems.map(item => {
             result += Number(item.price);
-            dispatch(actionResultPriceCart(result));
+            dispatch(totalPriceCart(result));
         });
     });
 
     const handlerDelProduct = (e) => {
         return (dispatch, getState) => {
-            dispatch(actionDeleteProductCard(Number(e.target.getAttribute(
+            dispatch(deleteProductCart(Number(e.target.getAttribute(
                 'data-del'))));
             localStorage.setItem('cart', JSON.stringify(getState().cart.items));
         };

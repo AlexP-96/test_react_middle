@@ -4,10 +4,10 @@ import {
     useDispatch,
     useSelector,
 } from 'react-redux';
-import { actionIsLoaderProductSize } from '../../../redux/actions/actions';
 import Skeleton from '../../skeletons/Skeleton';
 import SizesList from './SizesList';
-import { sizesIsLoadingSelector } from '../../../redux/store/selectors';
+import { sizesIsLoadingSelector } from '../../../toolkitRedux/selectors';
+import { isLoadingSizes } from '../../../toolkitRedux/sizesSlice';
 
 const ProductSizes = ({ size }) => {
     const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const ProductSizes = ({ size }) => {
         dispatch(getSizes());
 
         return () => {
-            dispatch(actionIsLoaderProductSize(true));
+            dispatch(isLoadingSizes(true));
         };
     }, [dispatch]);
 

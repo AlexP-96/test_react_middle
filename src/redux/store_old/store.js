@@ -4,9 +4,9 @@ import {
 } from 'redux';
 import { thunk } from 'redux-thunk';
 
-import rootReducer from '../reducers/reducers';
-import { initialStateSize } from '../reducers/reducer-sizes';
-import { initialStateProduct } from '../reducers/reducer-product';
+import rootReducer from '../reducers_old/reducers';
+import { initialStateSize } from '../reducers_old/reducer-sizes';
+import { initialStateProduct } from '../reducers_old/reducer-product';
 import { composeWithDevTools } from '@redux-devtools/extension';
 
 const initialState = {

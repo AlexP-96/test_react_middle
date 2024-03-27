@@ -1,7 +1,7 @@
 import {
     GET_DATA_SIZES,
     IS_LOADER_PRODUCT_SIZE,
-} from '../actions/actions';
+} from '../actions_old/actions';
 
 export const initialStateSize = {
     isLoading: true,

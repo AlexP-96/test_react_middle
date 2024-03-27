@@ -12,7 +12,7 @@ import {
 import {
     listProductSelector,
     listProductsIsLoadingSelector,
-} from '../../redux/store/selectors';
+} from '../../toolkitRedux/selectors';
 
 
 const CatalogProduct = () => {
@@ -24,7 +24,6 @@ const CatalogProduct = () => {
 
     useEffect(() => {
         dispatch(getProducts());
-
     }, []);
 
     const iterateCatalogItems = () => {

@@ -1,4 +1,5 @@
 import React, {
+    useEffect,
     useState,
 } from 'react';
 import './ProductColor.css';
@@ -6,19 +7,18 @@ import {
     useDispatch,
 } from 'react-redux';
 import {
-    actionColor,
-    actionImageNext,
-} from '../../../redux/actions/actions';
+    addToStateColorProduct,
+    nextCountVisibleImageProduct,
+} from '../../../toolkitRedux/productSlice';
 
 const ProductColor = ({ colors }) => {
     const dispatch = useDispatch();
     const [checkedInput, setCheckedInput] = useState(true);
 
     const handlerChecked = (e, idColor) => {
-        dispatch(actionColor(idColor));
+        dispatch(addToStateColorProduct(idColor));
         setCheckedInput(e.target.checked = checkedInput);
-        dispatch(actionColor(idColor));
-        dispatch(actionImageNext(0));
+        dispatch(nextCountVisibleImageProduct(0));
     };
 
     const iterateColorName = () => {

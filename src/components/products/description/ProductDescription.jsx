@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { productColorDescriptionSelector } from '../../../redux/store/selectors';
+import { productColorDescriptionSelector } from '../../../toolkitRedux/selectors';
 
 const ProductDescription = () => {
     const description = useSelector(productColorDescriptionSelector);

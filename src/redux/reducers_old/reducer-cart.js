@@ -2,7 +2,7 @@ import {
     ADD_PRODUCT_CART,
     DELETE_PRODUCT_CART,
     RESULT_PRICE_CART,
-} from '../actions/actions';
+} from '../actions_old/actions';
 
 export const initialStateCard = {
     isLoading: true,

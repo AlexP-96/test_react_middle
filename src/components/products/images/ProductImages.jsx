@@ -6,15 +6,16 @@ import {
     useSelector,
 } from 'react-redux';
 
-import {
-    actionImageNext,
-    actionImagePrev,
-} from '../../../redux/actions/actions';
 import Skeleton from '../../skeletons/Skeleton';
 import {
     productSelector,
     sizesIsLoadingSelector,
-} from '../../../redux/store/selectors';
+} from '../../../toolkitRedux/selectors';
+import {
+    nextCountVisibleImageProduct,
+    prevCountVisibleImageProduct,
+} from '../../../toolkitRedux/productSlice';
+
 
 const ProductImages = () => {
     const dispatch = useDispatch();
@@ -24,15 +25,15 @@ const ProductImages = () => {
     const handlerImage = step => {
         let countImages = product.dataColor.images.length - 1;
         if (step === '+') {
-            dispatch(actionImageNext());
+            dispatch(nextCountVisibleImageProduct());
             if (product.countImage >= countImages) {
-                dispatch(actionImageNext(0));
+                dispatch(nextCountVisibleImageProduct(0));
             }
         }
         if (step === '-') {
-            dispatch(actionImagePrev());
+            dispatch(prevCountVisibleImageProduct());
             if (product.countImage < countImages) {
-                dispatch(actionImagePrev(countImages));
+                dispatch(prevCountVisibleImageProduct(countImages));
             }
         }
     };

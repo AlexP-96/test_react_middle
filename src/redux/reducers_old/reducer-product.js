@@ -7,7 +7,7 @@ import {
     IMAGE_PRODUCT_NEXT,
     IMAGE_PRODUCT_PREV,
     SELECT_SIZE_PRODUCT,
-} from '../actions/actions';
+} from '../actions_old/actions';
 
 export const initialStateProduct = {
     isLoading: true,
