@@ -9,7 +9,7 @@ import {
 import {
     addToStateColorProduct,
     nextCountVisibleImageProduct,
-} from '../../../toolkitRedux/productSlice';
+} from '../../../toolkitRedux/reducers/productSlice';
 
 const ProductColor = ({ colors }) => {
     const dispatch = useDispatch();

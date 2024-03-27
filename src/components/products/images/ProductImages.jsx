@@ -14,7 +14,7 @@ import {
 import {
     nextCountVisibleImageProduct,
     prevCountVisibleImageProduct,
-} from '../../../toolkitRedux/productSlice';
+} from '../../../toolkitRedux/reducers/productSlice';
 
 
 const ProductImages = () => {

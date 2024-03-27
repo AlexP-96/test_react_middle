@@ -18,9 +18,9 @@ import {
     cartItemsSelector,
     productSelector,
 } from '../../toolkitRedux/selectors';
-import { isLoadingProduct } from '../../toolkitRedux/productSlice';
+import { isLoadingProduct } from '../../toolkitRedux/reducers/productSlice';
 import { isLoadingSizes } from '../../toolkitRedux/sizesSlice';
-import { addProductCart } from '../../toolkitRedux/cartSlice';
+import { addProductCart } from '../../toolkitRedux/reducers/cartSlice';
 
 
 const SingleProduct = () => {

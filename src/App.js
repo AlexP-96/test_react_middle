@@ -16,7 +16,7 @@ import {
     useDispatch,
 } from 'react-redux';
 
-import { addProductCart } from './toolkitRedux/cartSlice';
+import { addProductCart } from './toolkitRedux/reducers/cartSlice';
 
 export default function App() {
 

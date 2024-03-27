@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import './ProductSize.css';
 import { useDispatch } from 'react-redux';
-import { currentSelectSize } from '../../../toolkitRedux/productSlice';
+import { currentSelectSize } from '../../../toolkitRedux/reducers/productSlice';
 
 const InputSize = ({
     availableId,

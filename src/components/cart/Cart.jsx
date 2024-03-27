@@ -14,7 +14,7 @@ import {
 import {
     deleteProductCart,
     totalPriceCart,
-} from '../../toolkitRedux/cartSlice';
+} from '../../toolkitRedux/reducers/cartSlice';
 
 const Card = () => {
     const dispatch = useDispatch();

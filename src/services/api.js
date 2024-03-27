@@ -1,14 +1,14 @@
 import {
     addToStateListProducts,
     isLoadingListProduct,
-} from '../toolkitRedux/listProductSlice';
+} from '../toolkitRedux/reducers/listProductSlice';
 import {
     addToStateColorProduct,
     addToStateProduct,
     currentIdColorProduct,
     currentNameProduct,
     isLoadingProduct,
-} from '../toolkitRedux/productSlice';
+} from '../toolkitRedux/reducers/productSlice';
 import {
     addToStateSizes,
     isLoadingSizes,
