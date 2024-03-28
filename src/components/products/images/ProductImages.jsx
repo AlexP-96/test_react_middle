@@ -2,13 +2,15 @@ import React from 'react';
 
 import './ProductImages.css';
 import {
+    shallowEqual,
     useDispatch,
     useSelector,
 } from 'react-redux';
 
 import Skeleton from '../../skeletons/Skeleton';
 import {
-    productSelector,
+    countsImagesProductSelector,
+    currentCountImageSelector,
     sizesIsLoadingSelector,
 } from '../../../toolkitRedux/selectors';
 import {
@@ -18,27 +20,29 @@ import {
 
 const ProductImages = () => {
     const dispatch = useDispatch();
-    const product = useSelector(productSelector);
-    const sizesIsLoading = useSelector(sizesIsLoadingSelector);
+
+    const productColorImages = useSelector(countsImagesProductSelector, shallowEqual);
+    const sizesIsLoading = useSelector(sizesIsLoadingSelector, shallowEqual);
+    const currentImage = useSelector(currentCountImageSelector, shallowEqual);
 
     const handlerImage = step => {
-        let countImages = product.dataColor.images.length - 1;
+        let countImages = productColorImages.length - 1;
         if (step === '+') {
             dispatch(nextCountVisibleImageProduct());
-            if (product.countImage >= countImages) {
+            if (currentImage >= countImages) {
                 dispatch(nextCountVisibleImageProduct(0));
             }
         }
         if (step === '-') {
             dispatch(prevCountVisibleImageProduct());
-            if (product.countImage < countImages) {
+            if (currentImage < countImages) {
                 dispatch(prevCountVisibleImageProduct(countImages));
             }
         }
     };
     return (
         <div className='wrapper__images-product'>
-            {product.dataColor.images && (
+            {productColorImages && (
                 <div className='image_product'>
                     <button
                         className='btn__image btn_image-prev'
@@ -54,7 +58,7 @@ const ProductImages = () => {
 
                     {!sizesIsLoading && (
                         <img
-                            src={product.dataColor.images[product.countImage]}
+                            src={productColorImages[currentImage]}
                             alt='name'
                         />
                     )}

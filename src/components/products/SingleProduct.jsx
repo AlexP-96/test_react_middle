@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {
+    shallowEqual,
     useDispatch,
     useSelector,
 } from 'react-redux';
@@ -16,18 +17,26 @@ import ProductSizes from './sizes/ProductSizes';
 import ProductDescription from './description/ProductDescription';
 import {
     cartItemsSelector,
-    productSelector,
+    colorProductSizesSelector,
+    currentProductIdColorSelector,
+    dataProductSelector,
+    productIsLoadingSelector,
+    productNameSelector,
 } from '../../toolkitRedux/selectors';
 import { isLoadingProduct } from '../../toolkitRedux/reducers/productSlice';
 import { isLoadingSizes } from '../../toolkitRedux/reducers/sizesSlice';
-import { addProductCart } from '../../toolkitRedux/reducers/cartSlice';
-
+import ProductPrice from './price/ProductPrice';
+import ButtonCart from './buttons/ButtonCart';
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
 
-    const product = useSelector(productSelector);
-    const cartProducts = useSelector(cartItemsSelector);
+    const productIsLoading = useSelector(productIsLoadingSelector);
+    const currentProductIdColor = useSelector(currentProductIdColorSelector);
+    const productColorsSizes = useSelector(colorProductSizesSelector);
+    const productData = useSelector(dataProductSelector);
+
+    const cartProducts = useSelector(cartItemsSelector, shallowEqual);
 
     const { product_id } = useParams();
 
@@ -42,11 +51,11 @@ const SingleProduct = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (product.idColor) {
+        if (currentProductIdColor) {
             dispatch(isLoadingSizes(true));
-            dispatch(getProductColor(Number(product_id), product.idColor));
+            dispatch(getProductColor(Number(product_id), currentProductIdColor));
         }
-    }, [product.idColor]);
+    }, [currentProductIdColor]);
 
     useEffect(() => {
         if (cartProducts.length !== 0) {
@@ -54,59 +63,24 @@ const SingleProduct = () => {
         }
     }, [cartProducts]);
 
-    const handlerCardProduct = () => {
-        if (product.selectSize === null) {
-            alert('Размер не выбран, выберите размер');
-        } else {
-            let objData = {
-                // idProduct: null,
-
-                productName: null,
-                productColor: null,
-                productSize: null,
-                price: null,
-                image: null,
-            };
-
-            objData.productName = product.nameProduct;
-            objData.productColor = product.dataColor.name;
-            objData.price = product.dataColor.price;
-            // objData.idProduct = product.data.id;
-            // objData.idColor = product.idColor;
-            objData.productSize = product.selectSize;
-            objData.image = product.dataColor.images[0];
-
-            dispatch(addProductCart(objData));
-        }
-    };
-
     return (
         <>
-            {product.isLoading && (
+            {productIsLoading && (
                 <Skeleton
                     width={300}
                     height={400}
                 />
             )}
 
-            {!product.isLoading && (
+            {!productIsLoading && (
                 <div className='product__item'>
-                    <h3 className='title__product'>{product.nameProduct}</h3>
+                    <h3 className='title__product'>{productNameSelector}</h3>
                     <ProductImages />
-                    <ProductColor colors={product.data} />
+                    <ProductColor colors={productData} />
                     <ProductDescription />
-                    <div className='sizes__product'>
-                        <ProductSizes size={product.dataColor.sizes} />
-                    </div>
-                    <div className='price__product'>
-                        Цена: <strong>{product.dataColor.price}</strong>
-                    </div>
-                    <button
-                        className='to__card-product'
-                        onClick={handlerCardProduct}
-                    >
-                        В корзину
-                    </button>
+                    <ProductSizes size={productColorsSizes} />
+                    <ProductPrice />
+                    <ButtonCart />
                 </div>
             )}
         </>

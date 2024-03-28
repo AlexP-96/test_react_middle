@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { getSizes } from '../../../services/api';
 import {
+    shallowEqual,
     useDispatch,
     useSelector,
 } from 'react-redux';
@@ -12,7 +13,7 @@ import { isLoadingSizes } from '../../../toolkitRedux/reducers/sizesSlice';
 const ProductSizes = ({ size }) => {
 
     const dispatch = useDispatch();
-    const isLoading = useSelector(sizesIsLoadingSelector);
+    const isLoading = useSelector(sizesIsLoadingSelector, shallowEqual);
 
     useEffect(() => {
         dispatch(getSizes());
@@ -23,7 +24,7 @@ const ProductSizes = ({ size }) => {
     }, [dispatch]);
 
     return (
-        <>
+        <div className='sizes__product'>
             <h5 className='title__sizes'>Доступные размеры</h5>
             {isLoading && (
                 <Skeleton
@@ -37,7 +38,7 @@ const ProductSizes = ({ size }) => {
             }
 
 
-        </>
+        </div>
     );
 };
 

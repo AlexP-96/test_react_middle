@@ -4,13 +4,12 @@ import {
 } from 'react-redux';
 import InputSize from './InputSize';
 import { sizesListSelector } from '../../../toolkitRedux/selectors';
+import { useMemo } from 'react';
 
 const SizesList = ({ size }) => {
     const sizesList = useSelector(sizesListSelector, shallowEqual);
 
     if (!size || !sizesList.length) return null;
-
-    console.log(sizesList);
 
     return (
         <div className='wrapper__sizes'>

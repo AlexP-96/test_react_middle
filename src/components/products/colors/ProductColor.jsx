@@ -6,7 +6,6 @@ import {
     useDispatch,
 } from 'react-redux';
 import {
-    addToStateColorProduct,
     currentIdColorProduct,
     nextCountVisibleImageProduct,
 } from '../../../toolkitRedux/reducers/productSlice';
@@ -20,7 +19,7 @@ const ProductColor = ({ colors }) => {
         setCheckedInput(e.target.checked = checkedInput);
         dispatch(nextCountVisibleImageProduct(0));
     };
-    console.log(colors);
+
     const iterateColorName = () => {
         return (
             colors.colors.map((_color, index) => {

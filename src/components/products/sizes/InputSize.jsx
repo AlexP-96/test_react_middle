@@ -1,7 +1,11 @@
-import React, { useEffect } from 'react';
+import React, {
+    useEffect,
+} from 'react';
 import classNames from 'classnames';
 import './ProductSize.css';
-import { useDispatch } from 'react-redux';
+import {
+    useDispatch,
+} from 'react-redux';
 import { currentSelectSize } from '../../../toolkitRedux/reducers/productSlice';
 
 const InputSize = ({
@@ -15,6 +19,7 @@ const InputSize = ({
     useEffect(() => () => {
         dispatch(currentSelectSize(null));
     }, []);
+
     return (
         <div className='aside__radio-size-product'>
             <input
