@@ -12,6 +12,7 @@ export const productNameSelector = (state) => state.product.nameProduct;
 export const dataProductSelector = (state) => state.product.data;
 export const currentProductIdColorSelector = (state) => state.product.idColor;
 export const productColorDescriptionSelector = (state) => state.product.dataColor.description;
+export const productDataColorsSelector = (state) => state.product.data.colors;
 export const colorProductSelector = (state) => state.product.dataColor;
 export const selectedSizeProductSelector = (state) => state.product.selectSize;
 export const nameColorsProductSelector = (state) => state.product.dataColor.name;

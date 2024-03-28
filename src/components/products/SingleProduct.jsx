@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {
-    shallowEqual,
     useDispatch,
     useSelector,
 } from 'react-redux';
@@ -10,19 +9,20 @@ import Skeleton from '../skeletons/Skeleton';
 import {
     getProduct,
     getProductColor,
+    getSizes,
 } from '../../services/api';
-import ProductColor from './colors/ProductColor';
+
+import ProductColor from './product_colors/ProductColor';
 import ProductImages from './images/ProductImages';
 import ProductSizes from './sizes/ProductSizes';
 import ProductDescription from './description/ProductDescription';
+
 import {
-    cartItemsSelector,
-    colorProductSizesSelector,
     currentProductIdColorSelector,
-    dataProductSelector,
     productIsLoadingSelector,
     productNameSelector,
 } from '../../toolkitRedux/selectors';
+
 import { isLoadingProduct } from '../../toolkitRedux/reducers/productSlice';
 import { isLoadingSizes } from '../../toolkitRedux/reducers/sizesSlice';
 import ProductPrice from './price/ProductPrice';
@@ -33,8 +33,15 @@ const SingleProduct = () => {
 
     const productIsLoading = useSelector(productIsLoadingSelector);
     const currentProductIdColor = useSelector(currentProductIdColorSelector);
-    const productColorsSizes = useSelector(colorProductSizesSelector);
-    const productData = useSelector(dataProductSelector);
+    const productName = useSelector(productNameSelector);
+
+    useEffect(() => {
+        dispatch(getSizes());
+
+        return () => {
+            dispatch(isLoadingSizes(true));
+        };
+    }, []);
 
     const { product_id } = useParams();
 
@@ -51,6 +58,8 @@ const SingleProduct = () => {
         }
     }, [currentProductIdColor]);
 
+
+
     return (
         <>
             {productIsLoading && (
@@ -62,11 +71,11 @@ const SingleProduct = () => {
 
             {!productIsLoading && (
                 <div className='product__item'>
-                    <h3 className='title__product'>{productNameSelector}</h3>
+                    <h3 className='title__product'>{productName}</h3>
                     <ProductImages />
-                    <ProductColor colors={productData} />
+                    <ProductColor />
                     <ProductDescription />
-                    <ProductSizes size={productColorsSizes} />
+                    <ProductSizes />
                     <ProductPrice />
                     <ButtonCart />
                 </div>

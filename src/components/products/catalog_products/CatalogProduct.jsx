@@ -4,7 +4,7 @@ import React, {
 
 import ProductList from './ProductList';
 
-import { getProducts } from '../../services/api';
+import { getProducts } from '../../../services/api';
 import {
     useDispatch,
     useSelector,
@@ -12,7 +12,7 @@ import {
 import {
     listProductSelector,
     listProductsIsLoadingSelector,
-} from '../../toolkitRedux/selectors';
+} from '../../../toolkitRedux/selectors';
 
 
 const CatalogProduct = () => {

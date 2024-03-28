@@ -7,13 +7,17 @@ import {
 } from 'react-redux';
 import Skeleton from '../../skeletons/Skeleton';
 import SizesList from './SizesList';
-import { sizesIsLoadingSelector } from '../../../toolkitRedux/selectors';
+import {
+    colorProductSizesSelector,
+    sizesIsLoadingSelector,
+} from '../../../toolkitRedux/selectors';
 import { isLoadingSizes } from '../../../toolkitRedux/reducers/sizesSlice';
 
-const ProductSizes = ({ size }) => {
+const ProductSizes = () => {
 
     const dispatch = useDispatch();
     const isLoading = useSelector(sizesIsLoadingSelector, shallowEqual);
+    const productColorsSizes = useSelector(colorProductSizesSelector);
 
     useEffect(() => {
         dispatch(getSizes());
@@ -24,7 +28,7 @@ const ProductSizes = ({ size }) => {
     }, [dispatch]);
 
     return (
-        <div className='sizes__product'>
+        <div>
             <h5 className='title__sizes'>Доступные размеры</h5>
             {isLoading && (
                 <Skeleton
@@ -34,7 +38,7 @@ const ProductSizes = ({ size }) => {
                 />
             )}
             {
-                !isLoading && <SizesList size={size} />
+                !isLoading && <SizesList size={productColorsSizes} />
             }
 
 

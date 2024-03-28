@@ -20,6 +20,10 @@ const TotalPrice = () => {
             result += Number(item.price);
             dispatch(totalPriceCart(result));
         });
+
+        if (cardItems.length === 0) {
+            dispatch(totalPriceCart(0));
+        }
     });
     return (
         <>

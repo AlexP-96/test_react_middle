@@ -8,7 +8,7 @@ import {
 import './styles/zero.css';
 
 import Header from './components/header/Header';
-import CatalogProduct from './components/products/CatalogProduct';
+import CatalogProduct from './components/products/catalog_products/CatalogProduct';
 import Card from './components/cart/Cart';
 import SingleProduct from './components/products/SingleProduct';
 import WrapperSingleProduct from './components/products/WrapperSingleProduct';
