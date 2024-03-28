@@ -1,6 +1,15 @@
 .wrapper__products-card {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
+}
+
+.text__total-sum {
+    font-size: 22px;
+}
+
+.text__total-sum strong {
+    font-weight: bold;
 }
 
 .wrapper__product-card {

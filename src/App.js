@@ -7,7 +7,7 @@ import {
 
 import './styles/zero.css';
 
-import Header from './components/header/header';
+import Header from './components/header/Header';
 import CatalogProduct from './components/products/CatalogProduct';
 import Card from './components/cart/Cart';
 import SingleProduct from './components/products/SingleProduct';
