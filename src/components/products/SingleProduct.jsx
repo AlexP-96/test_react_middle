@@ -36,19 +36,13 @@ const SingleProduct = () => {
     const productColorsSizes = useSelector(colorProductSizesSelector);
     const productData = useSelector(dataProductSelector);
 
-    const cartProducts = useSelector(cartItemsSelector, shallowEqual);
-
     const { product_id } = useParams();
 
     useEffect(() => {
         dispatch(isLoadingProduct(true));
         dispatch(getProduct(Number(product_id)));
 
-        return () => {
-            // dispatch(actionIsLoader(true));
-        };
-
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
         if (currentProductIdColor) {
@@ -56,12 +50,6 @@ const SingleProduct = () => {
             dispatch(getProductColor(Number(product_id), currentProductIdColor));
         }
     }, [currentProductIdColor]);
-
-    useEffect(() => {
-        if (cartProducts.length !== 0) {
-            localStorage.setItem('cart', JSON.stringify(cartProducts));
-        }
-    }, [cartProducts]);
 
     return (
         <>
