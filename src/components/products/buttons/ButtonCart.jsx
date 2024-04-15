@@ -4,26 +4,27 @@ import {
     useDispatch,
 } from 'react-redux';
 
-const ButtonCart = () => {
 
-    const dispatch = useDispatch();
+const funcTest = () => {
 
-    const handlerCardProduct = () => {
-        return (dispatch, getState) => {
+    }
 
-            const {
-                product,
-            } = getState();
-            const {
-                nameProduct,
-                selectSize,
-                dataColor,
-            } = product;
-            const {
-                name,
-                price,
-                images,
-            } = dataColor;
+    const handlerCardProduct = () => (dispatch, getState) => {
+    const {
+        product,
+    } = getState();
+
+    const {
+        nameProduct,
+        selectSize,
+        dataColor,
+    } = product;
+
+    const {
+        name,
+        price,
+        images,
+    } = dataColor;
 
             if (selectSize === null) {
                 alert('Размер не выбран, выберите размер');
@@ -48,9 +49,11 @@ const ButtonCart = () => {
 
                 localStorage.setItem('cart', JSON.stringify(cart.items));
 
-            }
-        };
-    };
+    }
+};
+
+const ButtonCart = () => {
+    const dispatch = useDispatch();
 
     return (
         <button
