@@ -40,8 +40,6 @@ const ProductSizes = () => {
             {
                 !isLoading && <SizesList size={productColorsSizes} />
             }
-
-
         </div>
     );
 };
