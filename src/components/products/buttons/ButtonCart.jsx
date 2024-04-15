@@ -1,8 +1,15 @@
 import React from 'react';
 import { addProductCart } from '../../../toolkitRedux/reducers/cartSlice';
-import { useDispatch } from 'react-redux';
+import {
+    useDispatch,
+} from 'react-redux';
 
-const handlerCardProduct = () => (dispatch, getState) => {
+
+const funcTest = () => {
+
+    }
+
+    const handlerCardProduct = () => (dispatch, getState) => {
     const {
         product,
     } = getState();
@@ -19,28 +26,28 @@ const handlerCardProduct = () => (dispatch, getState) => {
         images,
     } = dataColor;
 
-    if (selectSize === null) {
-        alert('Размер не выбран, выберите размер');
-    } else {
-        let objData = {
-            productName: null,
-            productColor: null,
-            productSize: null,
-            price: null,
-            image: null,
-        };
+            if (selectSize === null) {
+                alert('Размер не выбран, выберите размер');
+            } else {
+                let objData = {
+                    productName: null,
+                    productColor: null,
+                    productSize: null,
+                    price: null,
+                    image: null,
+                };
 
-        objData.productName = nameProduct;
-        objData.productColor = name;
-        objData.price = price;
-        objData.productSize = selectSize;
-        objData.image = images[0];
+                objData.productName = nameProduct;
+                objData.productColor = name;
+                objData.price = price;
+                objData.productSize = selectSize;
+                objData.image = images[0];
 
-        dispatch(addProductCart(objData));
+                dispatch(addProductCart(objData));
 
-        const { cart } = getState();
+                const { cart } = getState();
 
-        localStorage.setItem('cart', JSON.stringify(cart.items));
+                localStorage.setItem('cart', JSON.stringify(cart.items));
 
     }
 };
