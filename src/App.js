@@ -23,7 +23,6 @@ export default function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // console.log();
         let dataCartLocalStorage = localStorage.getItem('cart');
 
         if (JSON.parse(dataCartLocalStorage) !== null && JSON.parse(dataCartLocalStorage).length > 0) {
