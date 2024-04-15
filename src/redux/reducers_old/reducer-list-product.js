@@ -1,7 +1,7 @@
 import {
     DATA_LIST_PRODUCT,
     LOADING_LIST_PRODUCT,
-} from '../actions/actions';
+} from '../actions_old/actions';
 
 const initialStateListProduct = {
     isLoading: true,

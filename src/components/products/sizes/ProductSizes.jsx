@@ -1,29 +1,34 @@
 import React, { useEffect } from 'react';
 import { getSizes } from '../../../services/api';
 import {
+    shallowEqual,
     useDispatch,
     useSelector,
 } from 'react-redux';
-import { actionIsLoaderProductSize } from '../../../redux/actions/actions';
 import Skeleton from '../../skeletons/Skeleton';
 import SizesList from './SizesList';
-import { sizesIsLoadingSelector } from '../../../redux/store/selectors';
+import {
+    colorProductSizesSelector,
+    sizesIsLoadingSelector,
+} from '../../../toolkitRedux/selectors';
+import { isLoadingSizes } from '../../../toolkitRedux/reducers/sizesSlice';
 
-const ProductSizes = ({ size }) => {
+const ProductSizes = () => {
+
     const dispatch = useDispatch();
-
-    const isLoading = useSelector(sizesIsLoadingSelector);
+    const isLoading = useSelector(sizesIsLoadingSelector, shallowEqual);
+    const productColorsSizes = useSelector(colorProductSizesSelector);
 
     useEffect(() => {
         dispatch(getSizes());
 
         return () => {
-            dispatch(actionIsLoaderProductSize(true));
+            dispatch(isLoadingSizes(true));
         };
     }, [dispatch]);
 
     return (
-        <>
+        <div>
             <h5 className='title__sizes'>Доступные размеры</h5>
             {isLoading && (
                 <Skeleton
@@ -33,11 +38,9 @@ const ProductSizes = ({ size }) => {
                 />
             )}
             {
-                !isLoading && <SizesList size={size} />
+                !isLoading && <SizesList size={productColorsSizes} />
             }
-
-
-        </>
+        </div>
     );
 };
 

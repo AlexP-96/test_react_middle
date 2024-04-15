@@ -1,8 +1,12 @@
-import React, { useEffect } from 'react';
+import React, {
+    useEffect,
+} from 'react';
 import classNames from 'classnames';
 import './ProductSize.css';
-import { useDispatch } from 'react-redux';
-import { actionSelectSizeProduct } from '../../../redux/actions/actions';
+import {
+    useDispatch,
+} from 'react-redux';
+import { currentSelectSize } from '../../../toolkitRedux/reducers/productSlice';
 
 const InputSize = ({
     availableId,
@@ -13,15 +17,16 @@ const InputSize = ({
     const dispatch = useDispatch();
 
     useEffect(() => () => {
-        dispatch(actionSelectSizeProduct(null));
+        dispatch(currentSelectSize(null));
     }, []);
+
     return (
         <div className='aside__radio-size-product'>
             <input
                 type='radio'
                 name='size'
                 disabled={!nothing}
-                onChange={(e) => dispatch(actionSelectSizeProduct(e.target.value))}
+                onChange={(e) => dispatch(currentSelectSize(e.target.value))}
                 value={label}
                 id={'select_size_' + availableId}
                 className='input__radio-product'

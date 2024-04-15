@@ -2,45 +2,52 @@ import React from 'react';
 
 import './ProductImages.css';
 import {
+    shallowEqual,
     useDispatch,
     useSelector,
 } from 'react-redux';
 
-import {
-    actionImageNext,
-    actionImagePrev,
-} from '../../../redux/actions/actions';
 import Skeleton from '../../skeletons/Skeleton';
 import {
-    productSelector,
+    countsImagesProductSelector,
+    currentCountImageSelector,
     sizesIsLoadingSelector,
-} from '../../../redux/store/selectors';
+} from '../../../toolkitRedux/selectors';
+import {
+    nextCountVisibleImageProduct,
+    prevCountVisibleImageProduct,
+} from '../../../toolkitRedux/reducers/productSlice';
 
 const ProductImages = () => {
     const dispatch = useDispatch();
-    const product = useSelector(productSelector);
-    const sizesIsLoading = useSelector(sizesIsLoadingSelector);
+
+    const productColorImages = useSelector(countsImagesProductSelector, shallowEqual);
+    const sizesIsLoading = useSelector(sizesIsLoadingSelector, shallowEqual);
+    const currentImage = useSelector(currentCountImageSelector, shallowEqual);
 
     const handlerImage = step => {
-        let countImages = product.dataColor.images.length - 1;
+        let countImages = productColorImages.length - 1;
         if (step === '+') {
-            dispatch(actionImageNext());
-            if (product.countImage >= countImages) {
-                dispatch(actionImageNext(0));
+            dispatch(nextCountVisibleImageProduct());
+            if (currentImage >= countImages) {
+                dispatch(nextCountVisibleImageProduct(0));
             }
         }
         if (step === '-') {
-            dispatch(actionImagePrev());
-            if (product.countImage < countImages) {
-                dispatch(actionImagePrev(countImages));
+            dispatch(prevCountVisibleImageProduct());
+            if (currentImage < countImages) {
+                dispatch(prevCountVisibleImageProduct(countImages));
             }
         }
     };
     return (
         <div className='wrapper__images-product'>
-            {product.dataColor.images && (
+            {productColorImages && (
                 <div className='image_product'>
-                    <button className='btn__image btn_image-prev' onClick={() => handlerImage('-')}></button>
+                    <button
+                        className='btn__image btn_image-prev'
+                        onClick={() => handlerImage('-')}
+                    ></button>
 
                     {sizesIsLoading && (
                         <Skeleton
@@ -51,12 +58,15 @@ const ProductImages = () => {
 
                     {!sizesIsLoading && (
                         <img
-                            src={product.dataColor.images[product.countImage]}
+                            src={productColorImages[currentImage]}
                             alt='name'
                         />
                     )}
 
-                    <button className='btn__image btn_image-next' onClick={() => handlerImage('+')}></button>
+                    <button
+                        className='btn__image btn_image-next'
+                        onClick={() => handlerImage('+')}
+                    ></button>
                 </div>
             )}
         </div>

@@ -1,14 +1,18 @@
 import {
-    actionColor,
-    actionDataColor,
-    actionDataListProduct,
-    actionGetName,
-    actionGetProduct,
-    actionGetSizesProduct,
-    actionIsLoader,
-    actionIsLoaderProductSize,
-    actionLoadingListProduct,
-} from '../redux/actions/actions';
+    addToStateListProducts,
+    isLoadingListProduct,
+} from '../toolkitRedux/reducers/listProductSlice';
+import {
+    addToStateColorProduct,
+    addToStateProduct,
+    currentIdColorProduct,
+    currentNameProduct,
+    isLoadingProduct,
+} from '../toolkitRedux/reducers/productSlice';
+import {
+    addToStateSizes,
+    isLoadingSizes,
+} from '../toolkitRedux/reducers/sizesSlice';
 
 const sizes = [
     {
@@ -142,11 +146,11 @@ const getSizes = () => (dispatch) => {
         setTimeout(() => resolve(sizes), 250);
     })
         .then((data) => {
-            dispatch(actionIsLoaderProductSize(false));
-            dispatch(actionGetSizesProduct(data));
+            dispatch(isLoadingSizes(false));
+            dispatch(addToStateSizes(data));
         })
         .catch((err) => {
-            dispatch(actionIsLoaderProductSize(true));
+            dispatch(isLoadingSizes(true));
             console.log(err);
         });
 };
@@ -168,10 +172,10 @@ const getProducts = () => (dispatch) => {
     return new Promise((resolve) => {
         setTimeout(() => resolve(products), 250);
     }).then(data => {
-        dispatch(actionLoadingListProduct(false));
-        dispatch(actionDataListProduct(data));
+        dispatch(isLoadingListProduct(false));
+        dispatch(addToStateListProducts(data));
     }).catch(err => {
-        dispatch(actionLoadingListProduct(true));
+        dispatch(isLoadingListProduct(true));
         console.log(err);
     })
 }
@@ -187,12 +191,12 @@ const getProduct = (id) => (dispatch) => {
             }
         }, 250);
     }).then(data => {
-        dispatch(actionIsLoader(false));
-        dispatch(actionColor(data.colors[0].id));
-        dispatch(actionGetName(data));
-        dispatch(actionGetProduct(data));
+        dispatch(isLoadingProduct(false));
+        dispatch(currentIdColorProduct(data.colors[0].id));
+        dispatch(currentNameProduct(data));
+        dispatch(addToStateProduct(data));
     }).catch(err => {
-        dispatch(actionIsLoader(true));
+        dispatch(isLoadingProduct(true));
         console.log(err);
     });
 }
@@ -215,10 +219,10 @@ const getProductColor = (productID, colorID) => (dispatch) => {
             }
         }, 250);
     }).then(data => {
-        dispatch(actionIsLoaderProductSize(false));
-        dispatch(actionDataColor(data));
+        dispatch(isLoadingSizes(false));
+        dispatch(addToStateColorProduct(data));
     }).catch(err => {
-        dispatch(actionIsLoader(true));
+        dispatch(isLoadingProduct(true));
         console.log(err);
     });
 }

@@ -5,33 +5,31 @@ import {
     Route,
 } from 'react-router-dom';
 
-import './zero.css';
+import './styles/zero.css';
 
-import Header from './components/header/header';
-import CatalogProduct from './components/products/CatalogProduct';
+import Header from './components/header/Header';
+import CatalogProduct from './components/products/catalog_products/CatalogProduct';
 import Card from './components/cart/Cart';
 import SingleProduct from './components/products/SingleProduct';
 import WrapperSingleProduct from './components/products/WrapperSingleProduct';
 import {
     useDispatch,
-    useSelector,
 } from 'react-redux';
-import { cartItemsSelector } from './redux/store/selectors';
-import {
-    actionAddProductCard,
-} from './redux/actions/actions';
+
+import { addProductCart } from './toolkitRedux/reducers/cartSlice';
 
 export default function App() {
 
     const dispatch = useDispatch();
 
     useEffect(() => {
+        // console.log();
         let dataCartLocalStorage = localStorage.getItem('cart');
 
         if (JSON.parse(dataCartLocalStorage) !== null && JSON.parse(dataCartLocalStorage).length > 0) {
 
             JSON.parse(dataCartLocalStorage).map(items => {
-                dispatch(actionAddProductCard(items));
+                dispatch(addProductCart(items));
             });
         }
     }, []);

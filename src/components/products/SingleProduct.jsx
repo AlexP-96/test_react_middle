@@ -5,115 +5,79 @@ import {
     useSelector,
 } from 'react-redux';
 import Skeleton from '../skeletons/Skeleton';
-import {
-    actionAddProductCard,
-    actionIsLoader,
-    actionIsLoaderProductSize,
-} from '../../redux/actions/actions';
+
 import {
     getProduct,
     getProductColor,
+    getSizes,
 } from '../../services/api';
-import ProductColor from './colors/ProductColor';
+
+import ProductColor from './product_colors/ProductColor';
 import ProductImages from './images/ProductImages';
 import ProductSizes from './sizes/ProductSizes';
 import ProductDescription from './description/ProductDescription';
-import {
-    cartItemsSelector,
-    productSelector,
-} from '../../redux/store/selectors';
 
+import {
+    currentProductIdColorSelector,
+    productIsLoadingSelector,
+    productNameSelector,
+} from '../../toolkitRedux/selectors';
+
+import { isLoadingProduct } from '../../toolkitRedux/reducers/productSlice';
+import { isLoadingSizes } from '../../toolkitRedux/reducers/sizesSlice';
+import ProductPrice from './price/ProductPrice';
+import ButtonCart from './buttons/ButtonCart';
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
 
-    const product = useSelector(productSelector);
-    const cartProducts = useSelector(cartItemsSelector);
+    const productIsLoading = useSelector(productIsLoadingSelector);
+    const currentProductIdColor = useSelector(currentProductIdColorSelector);
+    const productName = useSelector(productNameSelector);
+
+    useEffect(() => {
+        dispatch(getSizes());
+
+        return () => {
+            dispatch(isLoadingSizes(true));
+        };
+    }, []);
 
     const { product_id } = useParams();
 
     useEffect(() => {
-        dispatch(actionIsLoader(true));
+        dispatch(isLoadingProduct(true));
         dispatch(getProduct(Number(product_id)));
 
-        return () => {
-            // dispatch(actionIsLoader(true));
-        };
-
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
-        if (product.idColor) {
-            dispatch(actionIsLoaderProductSize(true));
-            dispatch(getProductColor(Number(product_id), product.idColor));
+        if (currentProductIdColor) {
+            dispatch(isLoadingSizes(true));
+            dispatch(getProductColor(Number(product_id), currentProductIdColor));
         }
-    }, [product.idColor]);
+    }, [currentProductIdColor]);
 
-    useEffect(() => {
-        if (cartProducts.length !== 0) {
-            localStorage.setItem('cart', JSON.stringify(cartProducts));
-        }
-    }, [cartProducts]);
 
-    const handlerCardProduct = () => {
-        if (product.selectSize === null) {
-            alert('Размер не выбран, выберите размер');
-        } else {
-            let objData = {
-                // idProduct: null,
-
-                productName: null,
-                productColor: null,
-                productSize: null,
-                price: null,
-                image: null,
-            };
-
-            objData.productName = product.nameProduct;
-            objData.productColor = product.dataColor.name;
-            objData.price = product.dataColor.price;
-            // objData.idProduct = product.data.id;
-            // objData.idColor = product.idColor;
-            objData.productSize = product.selectSize;
-            objData.image = product.dataColor.images[0];
-
-            dispatch(actionAddProductCard(objData));
-        }
-    };
 
     return (
         <>
-            {product.isLoading && (
+            {productIsLoading && (
                 <Skeleton
                     width={300}
                     height={400}
                 />
             )}
 
-            {!product.isLoading && (
+            {!productIsLoading && (
                 <div className='product__item'>
-                    <h3 className='title__product'>{product.nameProduct}</h3>
-
+                    <h3 className='title__product'>{productName}</h3>
                     <ProductImages />
-
-                    <ProductColor colors={product.data} />
-
+                    <ProductColor />
                     <ProductDescription />
-
-                    <div className='sizes__product'>
-                        <ProductSizes size={product.dataColor.sizes} />
-                    </div>
-
-                    <div className='price__product'>
-                        Цена: <strong>{product.dataColor.price}</strong>
-                    </div>
-
-                    <button
-                        className='to__card-product'
-                        onClick={handlerCardProduct}
-                    >
-                        В корзину
-                    </button>
+                    <ProductSizes />
+                    <ProductPrice />
+                    <ButtonCart />
                 </div>
             )}
         </>

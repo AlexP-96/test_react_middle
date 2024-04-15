@@ -4,26 +4,31 @@ import React, {
 import './ProductColor.css';
 import {
     useDispatch,
+    useSelector,
 } from 'react-redux';
 import {
-    actionColor,
-    actionImageNext,
-} from '../../../redux/actions/actions';
+    currentIdColorProduct,
+    nextCountVisibleImageProduct,
+} from '../../../toolkitRedux/reducers/productSlice';
+import {
+    dataProductSelector,
+    productDataColorsSelector,
+} from '../../../toolkitRedux/selectors';
 
 const ProductColor = ({ colors }) => {
     const dispatch = useDispatch();
+    const productData = useSelector(productDataColorsSelector);
     const [checkedInput, setCheckedInput] = useState(true);
 
     const handlerChecked = (e, idColor) => {
-        dispatch(actionColor(idColor));
+        dispatch(currentIdColorProduct(idColor));
         setCheckedInput(e.target.checked = checkedInput);
-        dispatch(actionColor(idColor));
-        dispatch(actionImageNext(0));
+        dispatch(nextCountVisibleImageProduct(0));
     };
 
     const iterateColorName = () => {
         return (
-            colors.colors.map((_color, index) => {
+            productData.map((_color, index) => {
                 return (
                     <div
                         className='wrapper__color'
@@ -51,7 +56,7 @@ const ProductColor = ({ colors }) => {
             <div className='title__sizes-product'>Доступные цвета:</div>
             <div className='aside__colors'>
                 {
-                    colors.colors &&
+                    productData &&
                     iterateColorName()
                 }
             </div>

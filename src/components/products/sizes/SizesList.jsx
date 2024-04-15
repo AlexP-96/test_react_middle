@@ -3,7 +3,7 @@ import {
     useSelector,
 } from 'react-redux';
 import InputSize from './InputSize';
-import { sizesListSelector } from '../../../redux/store/selectors';
+import { sizesListSelector } from '../../../toolkitRedux/selectors';
 
 const SizesList = ({ size }) => {
     const sizesList = useSelector(sizesListSelector, shallowEqual);
