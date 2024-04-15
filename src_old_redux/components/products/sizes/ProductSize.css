@@ -1,0 +1,44 @@
+
+.input__radio-product {
+    width: 0;
+    height: 0;
+    position: absolute;
+    opacity: 0;
+}
+
+.title__sizes {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 20px;
+    text-decoration: underline;
+}
+
+.aside__sizes {
+    margin-top: 20px;
+    display: flex;
+    border: 1px solid darkgray;
+    padding: 10px;
+    gap: 5px;
+}
+
+.label__product {
+    cursor: pointer;
+    transition: all .3s;
+    padding: 8px;
+    display: block;
+}
+
+.input__radio-product:checked ~ .label__product {
+    /*border: 1px solid black;*/
+    border-radius: 5px;
+    background: #81ce81;
+    color: white;
+}
+
+.label__product.not_size {
+    text-decoration: line-through;
+    cursor: default;
+    opacity: 0.5;
+    background: red;
+    border-radius: 5px;
+}

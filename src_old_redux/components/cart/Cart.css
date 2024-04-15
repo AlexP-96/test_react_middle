@@ -1,0 +1,13 @@
+.wrapper__products-card {
+    display: flex;
+    gap: 20px;
+}
+
+.wrapper__product-card {
+    max-width: 300px;
+
+}
+
+.wrapper__product-card img {
+    width: 100%;
+}
