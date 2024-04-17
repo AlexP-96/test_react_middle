@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import {
     Routes,
@@ -18,16 +18,24 @@ import {
 
 import { addProductCart } from './toolkitRedux/reducers/cartSlice';
 
+interface IProductInCart {
+    image: string;
+    price: string;
+    productColor: string;
+    productName: string;
+    productSize: string;
+}
+
 export default function App() {
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        let dataCartLocalStorage = localStorage.getItem('cart');
+        let dataCartLocalStorage: Array<IProductInCart> = JSON.parse(localStorage.getItem('cart'));
 
-        if (JSON.parse(dataCartLocalStorage) !== null && JSON.parse(dataCartLocalStorage).length > 0) {
+        if (dataCartLocalStorage !== null && dataCartLocalStorage.length) {
 
-            JSON.parse(dataCartLocalStorage).map(items => {
+            dataCartLocalStorage.map(items => {
                 dispatch(addProductCart(items));
             });
         }
